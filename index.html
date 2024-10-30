@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PASSA OU REPASSA</title>
+    <title>PASSA OU REPASSA 2002</title>
     <style>
         * {
             margin: 0;
@@ -18,6 +18,16 @@
             align-items: center;
             justify-content: center;
             font-family: Arial, sans-serif;
+            background-color: #f0f0f0; /* Cor de fundo clara */
+        }
+
+        h1 {
+            font-size: 36px; /* Tamanho da fonte */
+            font-weight: bold;
+            color: #cf0aa4; /* Cor do texto */
+            margin-bottom: 20px; /* Espaço abaixo do título */
+            text-align: center; /* Centraliza o texto */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra no texto */
         }
 
         .button-container {
@@ -33,6 +43,7 @@
             border: none;
             cursor: pointer;
             transition: transform 0.2s ease;
+            font-size: 70px; /* Tamanho do ícone */
         }
 
         .button-blue {
@@ -73,47 +84,76 @@
         /* Media query para Samsung Galaxy Tab S6 Lite */
         @media (min-width: 1200px) and (max-width: 2000px) and (orientation: landscape) {
             .button-container {
-                gap: 200px;
+                gap: 200px; /* Ajusta o espaço entre os botões */
             }
 
             .button {
                 width: 150px;
                 height: 150px;
+                font-size: 60px; /* Ajusta o tamanho do ícone */
             }
 
             .display {
-                font-size: 18px;
+                font-size: 18px; /* Tamanho da fonte reduzido */
             }
 
             .reset-button {
                 height: 80px;
                 width: 80px;
-                font-size: 14px;
+                font-size: 14px; /* Tamanho da fonte reduzido */
             }
+
+       
         }
+        
+
+
+        
     </style>
 </head>
 <body>
+    <h1>Passa ou repassa da 2002</h1> <!-- Título adicionado -->
     <div class="button-container">
-        <button class="button button-blue" onclick="buttonClicked('AZUL')"></button>
-        <button class="button button-red" onclick="buttonClicked('VERMELHO')"></button>
+        <button class="button button-blue" onclick="buttonClicked('ESTRELA')">⭐️</button>
+        <button class="button button-red" onclick="buttonClicked('LUA')">🌕</button>
     </div>
     <div class="display" id="display">PREPAREM-SE</div>
     <button class="reset-button" onclick="resetDisplay()">Resetar</button>
 
+    <!-- Elementos de áudio -->
+    <audio id="audioAzul" src="assets/Sirene de Ambulância - Efeito Sonoro - Sons diferentes pra trolar.mp3"></audio>
+    <audio id="audioVermelho" src="assets/Sirene de Ambulância - Efeito Sonoro - Sons diferentes pra trolar.mp3"></audio>
+    
+  
+    
     <script>
         let clicked = false;
 
         function buttonClicked(color) {
             if (!clicked) {
-                document.getElementById('display').innerText = `A EQUIPE  ${color} IRÁ RESPONDER`;
+                document.getElementById('display').innerText = `A EQUIPE ${color} IRÁ RESPONDER`;
                 clicked = true;
+
+                // Toca a música correspondente
+                if (color === 'ESTRELA') {
+                    document.getElementById('audioAzul').play();
+                } else if (color === 'LUA') {
+                    document.getElementById('audioVermelho').play();
+                }
             }
         }
 
         function resetDisplay() {
             document.getElementById('display').innerText = "PREPAREM-SE";
             clicked = false;
+
+            // Para a música em execução
+            document.getElementById('audioAzul').pause();
+            document.getElementById('audioVermelho').pause();
+
+            // Reseta o tempo das músicas para o início
+            document.getElementById('audioAzul').currentTime = 0;
+            document.getElementById('audioVermelho').currentTime = 0;
         }
     </script>
 </body>
